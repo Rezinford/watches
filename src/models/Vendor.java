@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Vendor {
     private int id;
-    private  String vendorName;
+    private String name;
     private Country country;
 
-    public Vendor(String vendorName, Country country) {
-        this.vendorName = vendorName;
+    public Vendor(String name, Country country) {
+        this.name = name;
         this.country = country;
     }
 
-    public String getVendorName() {
-        return vendorName;
+    public String getname() {
+        return name;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public Country getCountry() {
@@ -34,19 +34,19 @@ public class Vendor {
         if (o == null || getClass() != o.getClass()) return false;
         Vendor vendor = (Vendor) o;
         return id == vendor.id &&
-                Objects.equals(vendorName, vendor.vendorName) &&
+                Objects.equals(name, vendor.name) &&
                 Objects.equals(country, vendor.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vendorName, country);
+        return Objects.hash(id, name, country);
     }
 
     @Override
     public String toString() {
         return "Vendor{" +
-                "vendorName='" + vendorName + '\'' +
+                "name='" + name + '\'' +
                 ", country=" + country +
                 '}';
     }

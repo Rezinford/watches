@@ -1,10 +1,9 @@
 package models.wath;
 
 import models.Vendor;
-import models.type.Brand;
-import models.type.WatchType;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Watch {
     private String brand;
