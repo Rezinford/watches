@@ -2,10 +2,12 @@ package dao;
 
 import models.Country;
 
+import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import static db.dbConnect.getConnection;
@@ -14,45 +16,67 @@ import static db.dbConnect.getConnection;
 public class CountryDAO implements DAO<Country> {
     final String table = "score.country";
     @Override
-    public Country create(Country country) {
-        final String operator = "insert into";
-        final String parameter =  "(name)";
-        final String values = "values (?)";
-        final String verification =  "returning *";
-        final String sql =  operator +" "+ table +" "+ parameter +" "+ values +" "+ verification +" "+ ";";
+    public void create(Country country) {
+        final String sqlRequest = "insert into " + table + " (name) values (?)";
         try (final PreparedStatement prepareStatement
-                     = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                     = getConnection().prepareStatement(sqlRequest, Statement.RETURN_GENERATED_KEYS)) {
             prepareStatement.setString(1,country.getName());
             prepareStatement.execute();
-            ResultSet rs = prepareStatement.getGeneratedKeys();
-            rs.next();
-            return new Country(rs.getInt("id"), rs.getString("name"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        return null;
     }
 
     @Override
-    public boolean update(Country model) {
-        return false;
+    public void update(Country country) {
+        final String sqlRequest = "update " + table +"set (name) = ? where country_id = ?";
+
+        try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
+            prepareStatement.setString(1, country.getName());
+            prepareStatement.setInt(2, country.getId());
+            prepareStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public void delete(int id) {
+        final String sqlRequest = "delete from " + table +" where country_id = ?";
+        try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
+            prepareStatement.setInt(1, id);
+            prepareStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Country> getAll() {
-        return null;
+    public List<Country> getAll() throws SQLException {
+        List<Country> resultList = new ArrayList<>();
+        final String sqlRequest = "select * from" + table;
+        try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
+                ResultSet rs = prepareStatement.executeQuery(sqlRequest);
+                while (rs.next()){
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    resultList.add(new Country(id, name));
+                }
+                return resultList;
+        }
     }
 
     @Override
-    public Country getById(int id) {
-        return null;
+    public Country getById(int idNumde)  throws SQLException{
+        final String  sqlRequest = "select * from" + table +" where id = ?";
+        try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
+            prepareStatement.setInt(1, idNumde);
+            prepareStatement.executeUpdate();
+            ResultSet rs = prepareStatement.executeQuery(sqlRequest);
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            return new Country(id, name);
+        }
     }
 }

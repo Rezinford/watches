@@ -12,11 +12,17 @@ public class Vendor {
         this.country = country;
     }
 
-    public String getname() {
+    public Vendor(int id, String name, Country country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

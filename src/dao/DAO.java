@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface DAO<T> {
-    T create(T model);
-    boolean update(T model);
-    boolean delete(int id);
-    List<T> getAll();
-    T getById(int id);
+    void create(T model);
+    void update(T model);
+    void delete(int id);
+    List<T> getAll() throws SQLException;
+    T getById(int id) throws SQLException;
 
 }

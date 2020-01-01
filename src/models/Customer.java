@@ -12,6 +12,13 @@ public class Customer {
         this.cartNumber = cartNumber;
     }
 
+    public Customer(int id, String name, int cartNumber, double sumOfOrders) {
+        this.id = id;
+        this.name = name;
+        this.cartNumber = cartNumber;
+        this.sumOfOrders = sumOfOrders;
+    }
+
     public int getId() {
         return id;
     }

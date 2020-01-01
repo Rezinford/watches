@@ -1,0 +1,25 @@
+ 1.   // как такое с могими элементами
+    default List<T> executeAndReturnCollection(PreparedStatement st, Function<ResultSet, T> toObject) {
+        try {
+            final ResultSet resultSet = st.executeQuery();
+            List<T> result = new ArrayList<>();
+            while (resultSet.next()) {
+                result.add(toObject.apply(resultSet));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }
+    }
+
+ 2.   //формирование правильго унивирсального запроса
+    //        final String operator = "insert into";
+    //        final String parameter =  "(name)";
+    //        final String values = "values (?)";
+    //        final String verification =  "returning *";
+    //        final String sql =  operator +" "+ table +" "+ parameter +" "+ values +" "+ verification +" "+ ";";
+
+ 3. // НАСКОЛЬКО ЗАТРАТНЫ И НУЖНО ЛИ ДЕЛАТЬ проверку апдуйта и ввода данных в sql
+    //            ResultSet rs = prepareStatement.getGeneratedKeys();
+    //            rs.next();
+    //            return new Country(rs.getInt("id"), rs.getString("name"));
