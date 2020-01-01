@@ -6,9 +6,17 @@ public class Customer {
     private int cartNumber;
     private double sumOfOrders;
 
+
     public Customer(String name, int cartNumber) {
         this.name = name;
         this.cartNumber = cartNumber;
+    }
+
+    public Customer(int id, String name, int cartNumber, double sumOfOrders) {
+        this.id = id;
+        this.name = name;
+        this.cartNumber = cartNumber;
+        this.sumOfOrders = sumOfOrders;
     }
 
     public int getId() {
@@ -38,4 +46,7 @@ public class Customer {
     public void setSumOfOrders(double sumOfOrders) {
         this.sumOfOrders = sumOfOrders;
     }
+
+
+
 }
