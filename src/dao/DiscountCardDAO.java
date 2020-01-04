@@ -1,5 +1,16 @@
 package dao;
 
+import models.DiscountCard;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import static db.dbConnect.getConnection;
+
 public class DiscountCardDAO implements DAO<models.DiscountCard> {
   final String table = "score.discountCard";
     @Override
@@ -21,8 +32,8 @@ public class DiscountCardDAO implements DAO<models.DiscountCard> {
         final String sqlRequest = "update " + table +"set (number, discount) values (?, ?) where country_id = ?";
 
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
-            prepareStatement.setString(1, country.getName());
-            prepareStatement.setInt(2, country.getId());
+            prepareStatement.setString(1, discountCard.getName());
+            prepareStatement.setInt(2, discountCard.getId());
             prepareStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,8 +52,8 @@ public class DiscountCardDAO implements DAO<models.DiscountCard> {
     }
 
     @Override
-    public List<Country> getAll() throws SQLException {
-        List<Country> resultList = new ArrayList<>();
+    public List<DiscountCard> getAll() throws SQLException {
+        List<DiscountCard> resultList = new ArrayList<>();
         final String sqlRequest = "select * from" + table;
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
                 ResultSet rs = prepareStatement.executeQuery(sqlRequest);
@@ -56,7 +67,7 @@ public class DiscountCardDAO implements DAO<models.DiscountCard> {
     }
 
     @Override
-    public Country getById(int idNumde)  throws SQLException{
+    public Country getById(int idNumde)  throws SQLException {
         final String  sqlRequest = "select * from" + table +" where id = ?";
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
             prepareStatement.setInt(1, idNumde);
