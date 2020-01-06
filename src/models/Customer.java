@@ -1,21 +1,23 @@
 package models;
 
+import java.util.Objects;
+
 public class Customer {
     private int id;
     private String name;
-    private int cartNumber;
+    private DiscountCard discountCard;
     private double sumOfOrders;
 
-
-    public Customer(String name, int cartNumber) {
-        this.name = name;
-        this.cartNumber = cartNumber;
-    }
-
-    public Customer(int id, String name, int cartNumber, double sumOfOrders) {
+    public Customer(int id, String name, DiscountCard discountCard, double sumOfOrders) {
         this.id = id;
         this.name = name;
-        this.cartNumber = cartNumber;
+        this.discountCard = discountCard;
+        this.sumOfOrders = sumOfOrders;
+    }
+
+    public Customer(String name, DiscountCard discountCard, double sumOfOrders) {
+        this.name = name;
+        this.discountCard = discountCard;
         this.sumOfOrders = sumOfOrders;
     }
 
@@ -27,26 +29,49 @@ public class Customer {
         return name;
     }
 
-    public int getCartNumber() {
-        return cartNumber;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DiscountCard getDiscountCard() {
+        return discountCard;
+    }
+
+    public void setDiscountCard(DiscountCard discountCard) {
+        this.discountCard = discountCard;
     }
 
     public double getSumOfOrders() {
         return sumOfOrders;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCartNumber(int cartNumber) {
-        this.cartNumber = cartNumber;
-    }
-
     public void setSumOfOrders(double sumOfOrders) {
         this.sumOfOrders = sumOfOrders;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id == customer.id &&
+                Double.compare(customer.sumOfOrders, sumOfOrders) == 0 &&
+                Objects.equals(name, customer.name) &&
+                Objects.equals(discountCard, customer.discountCard);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, discountCard, sumOfOrders);
+    }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", discountCard=" + discountCard +
+                ", sumOfOrders=" + sumOfOrders +
+                '}';
+    }
 }
