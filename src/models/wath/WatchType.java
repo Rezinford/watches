@@ -14,5 +14,5 @@ public interface WatchType {
     WatchType SMART =() ->"Smart";
     WatchType LUXURY =() ->"Luxury";
 
-        String daysForType();
+        String ForType();
 }

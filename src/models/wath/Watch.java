@@ -6,26 +6,29 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Watch {
-    private String brand;
+    private int id;
     private WatchType type;
     private BigDecimal price;
     private int quantity;
     private Vendor vendor;
 
-    public Watch(String brand, WatchType type, BigDecimal price, int quantity, Vendor vendor) {
-        this.brand = brand;
+    public Watch(int id, WatchType type, BigDecimal price, int quantity, Vendor vendor) {
+        this.id = id;
         this.type = type;
         this.price = price;
         this.quantity = quantity;
         this.vendor = vendor;
     }
 
-    public String getBrand() {
-        return brand;
+    public Watch(WatchType type, BigDecimal price, int quantity, Vendor vendor) {
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
+        this.vendor = vendor;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public int getId() {
+        return id;
     }
 
     public WatchType getType() {
@@ -62,32 +65,29 @@ public class Watch {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Watch watch = (Watch) o;
-        return brand.equals(watch.brand) &&
-                type == watch.type &&
-                vendor.equals(watch.vendor);
+        return id == watch.id &&
+                quantity == watch.quantity &&
+                Objects.equals(type, watch.type) &&
+                Objects.equals(price, watch.price) &&
+                Objects.equals(vendor, watch.vendor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, type, vendor);
+        return Objects.hash(id, type, price, quantity, vendor);
     }
 
     @Override
     public String toString() {
         return "Watch{" +
-                "brand='" + brand + '\'' +
+                "id=" + id +
                 ", type=" + type +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", vendor=" + vendor +
                 '}';
     }
-
 }
