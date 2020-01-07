@@ -1,7 +1,7 @@
 package models.order;
 
 import models.Customer;
-import models.wath.Watch;
+import models.watch.Watch;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

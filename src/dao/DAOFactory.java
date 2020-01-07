@@ -4,7 +4,8 @@ import models.Country;
 import models.Customer;
 import models.DiscountCard;
 import models.Vendor;
-import models.wath.Watch;
+import models.order.Order;
+import models.watch.Watch;
 
 public abstract class DAOFactory {
 
@@ -13,6 +14,7 @@ public abstract class DAOFactory {
         private static DAO<DiscountCard> discountCardDAO;
         private static DAO<Watch> watchDAO;
         private static DAO<Customer> customerDAO;
+        private static DAO<Order> orderDAO;
 
         private DAOFactory() {
         }
@@ -53,4 +55,10 @@ public abstract class DAOFactory {
 
             return customerDAO;
         }
+    public static DAO<Order> getOrderDAO() {
+        if (orderDAO == null) {
+            orderDAO = new OrderDAO();
+        }
+        return orderDAO;
+    }
 }

@@ -1,4 +1,4 @@
-package models.wath;
+package models.watch;
 
 import models.Vendor;
 

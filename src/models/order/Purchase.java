@@ -1,6 +1,6 @@
 package models.order;
 
-import models.wath.Watch;
+import models.watch.Watch;
 
 import java.math.BigDecimal;
 

@@ -2,7 +2,7 @@ package dao;
 
 import models.Country;
 import models.Vendor;
-import models.wath.Watch;
+import models.watch.Watch;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static db.dbConnect.getConnection;
-import static models.wath.WatchType.ANALOG;
+import static models.watch.WatchType.ANALOG;
 
-public class WatchDAO implements DAO<models.wath.Watch> {
+public class WatchDAO implements DAO<models.watch.Watch> {
     final String table = "score.watch";
     @Override
     public void create(Watch model) {

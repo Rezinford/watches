@@ -1,4 +1,4 @@
-package models.wath;
+package models.watch;
 
 public interface WatchType {
     WatchType ANALOG =() ->"Analog";
