@@ -4,6 +4,8 @@ import dao.DAO;
 import dao.DAOFactory;
 import models.watch.Watch;
 
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class WatchManager implements Manager<Watch> {
@@ -14,22 +16,39 @@ public class WatchManager implements Manager<Watch> {
     }
 
     @Override
-    public void create(Watch model) {
-
+    public boolean create(Watch model) {
+        if(model.getVendor() != null){
+            watchDAO.create(model);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void update(Watch model) {
-
+    public boolean update(Watch model) {
+        if(model.getVendor() != null){
+            watchDAO.update(model);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
-
+    public boolean delete(int id) {
+        if(id>0){
+            watchDAO.delete(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<Watch> getAll() {
-        return null;
+        try {
+            return watchDAO.getAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 }

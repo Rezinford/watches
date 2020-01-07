@@ -23,3 +23,6 @@
     //            ResultSet rs = prepareStatement.getGeneratedKeys();
     //            rs.next();
     //            return new Country(rs.getInt("id"), rs.getString("name"));
+
+ 4. Можно ли огранизовывать систему ошибок при вводе или заполнении спомощу эксепшеноа
+

@@ -4,8 +4,8 @@ package manage;
 import java.util.List;
 
 public interface Manager<T> {
-    void create(T model);
-    void update(T model);
-    void delete(int id);
+    boolean create(T model);
+    boolean update(T model);
+    boolean delete(int id);
     List<T> getAll() ;
 }

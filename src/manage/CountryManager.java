@@ -4,6 +4,8 @@ import dao.DAO;
 import dao.DAOFactory;
 import models.Country;
 
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class CountryManager implements Manager<Country>{
@@ -14,22 +16,39 @@ public class CountryManager implements Manager<Country>{
     }
 
     @Override
-    public void create(Country model) {
-
+    public boolean create(Country model) {
+        if (model.getName() != null){
+            countryDAO.create(model);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void update(Country model) {
-
+    public boolean update(Country model) {
+        if(model.getName() != null){
+            countryDAO.update(model);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
-
+    public boolean delete(int id) {
+        if(id>0) {
+            countryDAO.delete(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<Country> getAll() {
-        return null;
+        try {
+            return countryDAO.getAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 }
