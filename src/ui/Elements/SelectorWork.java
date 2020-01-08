@@ -24,17 +24,14 @@ public abstract class SelectorWork {
                     view();
                     break;
                 }
-
                 case 2: {
                     add(scanner);
                     break;
                 }
-
                 case 3: {
                     update(scanner);
                     break;
                 }
-
                 case 4: {
                     delete(scanner);
                     break;

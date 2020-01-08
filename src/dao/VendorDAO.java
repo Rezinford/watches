@@ -14,7 +14,7 @@ import static db.dbConnect.getConnection;
 
 public class VendorDAO implements DAO<models.Vendor> {
 
-    final String table = "score.vendor";
+    final String table = "watches.score.vendor";
 
     @Override
     public void create(Vendor vendor) {
@@ -37,7 +37,7 @@ public class VendorDAO implements DAO<models.Vendor> {
         final String sqlRequest = "update " + table +
                                     " set (name , countryId) " +
                                     "values (?, ?) " +
-                                    "where vendor_id = ?";
+                                    "where watches.score.vendor.id = ?";
 
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
             prepareStatement.setString(1, vendor.getName());
@@ -51,7 +51,7 @@ public class VendorDAO implements DAO<models.Vendor> {
 
     @Override
     public void delete(int id) {
-        final String sqlRequest = "delete from " + table + " where vendor_id = ?";
+        final String sqlRequest = "delete from " + table + " where watches.score.vendor.id = ?";
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
             prepareStatement.setInt(1, id);
             prepareStatement.executeUpdate();
@@ -64,9 +64,9 @@ public class VendorDAO implements DAO<models.Vendor> {
     public List<Vendor> getAll() throws SQLException {
         List<Vendor> resultList = new ArrayList<>();
 //        final String sqlRequest = "select * from" + table;
-        final String sqlRequest = "select * from score.vendor" +
-                                    "LEFT JOIN country " +
-                                    "ON score.vendor.countryid = score.country.id ";
+        final String sqlRequest = "select * from watches.score.vendor" +
+                                    "LEFT JOIN watches.score.country " +
+                                    "ON watches.score.vendor.countryid = score.country.id ";
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
             ResultSet rs = prepareStatement.executeQuery(sqlRequest);
             while (rs.next()) {
@@ -83,9 +83,10 @@ public class VendorDAO implements DAO<models.Vendor> {
     @Override
     public Vendor getById(int idNumde) throws SQLException {
 //        final String  sqlRequest = "select * from" + table +" where id = ?  LEFT JOIN country on vendor. ";
-        final String sqlRequest = "select * from score.vendor" +
-                                    "LEFT JOIN country " +
-                                    "ON score.vendor.countryid = score.country.id " +
+        final String sqlRequest = "select watches.score.vendor.id, watches.score.vendor.name, watches.score.vendor.countryId, watches.score.country.name " +
+                                    "from"+ table +
+                                    "LEFT JOIN watches.score.country " +
+                                    "ON watches.score.vendor.countryId = watches.score.country.id " +
                                     "where id = ?";
         try (final PreparedStatement prepareStatement = getConnection().prepareStatement(sqlRequest)) {
             prepareStatement.setInt(1, idNumde);
