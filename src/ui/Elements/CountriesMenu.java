@@ -2,40 +2,24 @@ package ui.Elements;
 
 import manage.CountryManager;
 import models.Country;
+import utils.ViewStatus;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class CountriesMenu extends SelectorWork{
-    public void show(Scanner scanner) {
+public class CountriesMenu extends SelectorWork implements ShowElement<Country>{
 
-    }
     private CountryManager countryManager =new CountryManager();
 
 
-
-    @Override
-    protected void view() {
-        System.out.println("----------- Countries ------------");
-//        List<Country> countryList = new ArrayList<>(countryManager.getAll());
-        for (Country country : new ArrayList<Country> (countryManager.getAll())) {
-            System.out.format("%d - %s", country.getId(), country.getName());
-        }
-        System.out.println("----------------------------------");
-    }
-
     @Override
     protected void add(Scanner scanner) {
+        System.out.println("----------- Countries ------------");
         System.out.print("Enter new name: ");
         String name = scanner.nextLine();
-        Country country = new Country(name);
-
-        if(countryManager.create(country)) {
-            System.out.println("Successful added");
-        }else {
-            System.out.println("Added failed...");
-        };
+        ViewStatus.viewExecutionStatus(countryManager.create(new Country(name)));
+        System.out.println("----------------------------------");
+        System.out.println();
     }
 
     @Override
@@ -45,12 +29,9 @@ public class CountriesMenu extends SelectorWork{
         int id = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter new name: ");
         String name = scanner.nextLine();
-        Country country = new Country(id, name);
-        if(countryManager.update(country)) {
-            System.out.println("Successful update");
-        }else {
-            System.out.println("Update failed...");
-        };
+        ViewStatus.viewExecutionStatus(countryManager.update(new Country(id, name)));
+        System.out.println();
+
     }
 
     @Override
@@ -58,10 +39,20 @@ public class CountriesMenu extends SelectorWork{
         view();
         System.out.println("Enter id");
         int id = Integer.parseInt(scanner.nextLine());
-        if(countryManager.delete(id)) {
-            System.out.println("Successful delete");
-        }else {
-            System.out.println("Delete failed...");
-        };
+        ViewStatus.viewExecutionStatus(countryManager.delete(id));
+        System.out.println();
     }
+
+    @Override
+    protected void view() {
+        System.out.println("----------- Countries ------------");
+        new ArrayList<>(countryManager.getAll()).forEach(this::viewElement);
+        System.out.println("----------------------------------");
+        System.out.println();
+    }
+    @Override
+    public void viewElement(Country model) {
+        System.out.format("%d - %s", model.getId(), model.getName());
+    }
+
 }
