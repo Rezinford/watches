@@ -2,14 +2,14 @@ package ui;
 
 import ui.Elements.CountriesMenu;
 import ui.Elements.CustomersMenu;
-import ui.Elements.VendorsMenu;
+import ui.Elements.VendorMenu;
 import ui.Elements.WatchesMenu;
 
 import java.util.Scanner;
 
 public class SelectorElementMenu {
     private CountriesMenu countriesMenu;
-    private VendorsMenu vendorsMenu;
+    private VendorMenu vendorMenu;
     private CustomersMenu customersMenu;
     private WatchesMenu watchesMenu;
 
@@ -35,8 +35,8 @@ public class SelectorElementMenu {
                     break;
                 }
                 case 2: {
-                    if (vendorsMenu != null) vendorsMenu = new VendorsMenu();
-                    vendorsMenu.show(scanner);
+                    if (vendorMenu != null) vendorMenu = new VendorMenu();
+                    vendorMenu.show(scanner);
                     break;
                 }
                 case 3: {

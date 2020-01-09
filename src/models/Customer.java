@@ -8,6 +8,15 @@ public class Customer {
     private DiscountCard discountCard;
     private double sumOfOrders;
 
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Customer(String name) {
+        this.name = name;
+    }
+
     public Customer(int id, String name, DiscountCard discountCard, double sumOfOrders) {
         this.id = id;
         this.name = name;
