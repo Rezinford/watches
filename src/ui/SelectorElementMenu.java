@@ -4,7 +4,9 @@ import ui.Elements.CountriesMenu;
 import ui.Elements.CustomersMenu;
 import ui.Elements.VendorMenu;
 import ui.Elements.WatchesMenu;
+import utils.InputData;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SelectorElementMenu {
@@ -23,30 +25,30 @@ public class SelectorElementMenu {
         System.out.println("0. return to main menu");
     }
 
-    public void show(Scanner scanner) {
+    public void show() throws IOException {
         int selection;
         do {
             viewMenu();
-            selection = scanner.nextInt();
+            selection =InputData.getInputInt();
             switch (selection) {
                 case 1: {
-                    if (countriesMenu != null) countriesMenu = new CountriesMenu();
-                    countriesMenu.show(scanner);
+                    if (countriesMenu == null) countriesMenu = new CountriesMenu();
+                    countriesMenu.show();
                     break;
                 }
                 case 2: {
-                    if (vendorMenu != null) vendorMenu = new VendorMenu();
-                    vendorMenu.show(scanner);
+                    if (vendorMenu == null) vendorMenu = new VendorMenu();
+                    vendorMenu.show();
                     break;
                 }
                 case 3: {
-                    if (countriesMenu != null) countriesMenu = new CountriesMenu();
-                    customersMenu.show(scanner);
+                    if (countriesMenu == null) countriesMenu = new CountriesMenu();
+                    customersMenu.show();
                     break;
                 }
                 case 4: {
-                    if (watchesMenu != null) watchesMenu = new WatchesMenu();
-                    watchesMenu.show(scanner);
+                    if (watchesMenu == null) watchesMenu = new WatchesMenu();
+                    watchesMenu.show();
                     break;
                 }
                 case 5: {

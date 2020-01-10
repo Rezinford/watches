@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static db.dbConnect.getConnection;
+import static db.DBConnect.getConnection;
 
 public class DiscountCardDAO implements DAO<models.DiscountCard> {
   final String table = "score.discountCard";

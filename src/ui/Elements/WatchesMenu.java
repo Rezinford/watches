@@ -3,8 +3,10 @@ package ui.Elements;
 import manage.WatchManager;
 import models.Vendor;
 import models.watch.Watch;
+import utils.InputData;
 import utils.ViewStatus;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,44 +28,44 @@ public class WatchesMenu extends SelectorWork implements ShowElement<Watch> {
     }
 
     @Override
-    protected void add(Scanner scanner) {
+    protected void add() throws IOException {
         System.out.print("Enter new type: ");
-        String type = scanner.nextLine();
+        String type = InputData.getInputString();
         System.out.println("Enter Price");
-        BigDecimal price = BigDecimal.valueOf(Integer.parseInt(scanner.nextLine()));
+        BigDecimal price = BigDecimal.valueOf(Long.parseLong(InputData.getInputString()));
         System.out.println("Enter Quantity");
-        int qty = Integer.parseInt(scanner.nextLine());
+        int qty = InputData.getInputInt();
         vendorMenu.view();
         System.out.print("Select vendor: ");
-        int vendorId = Integer.parseInt(scanner.nextLine());
+        int vendorId = InputData.getInputInt();
         ViewStatus.viewExecutionStatus(watchManager.create(new Watch(ANALOG,price,qty,new Vendor(vendorId,null, null))));
 
 
     }
 
     @Override
-    protected void update(Scanner scanner) {
+    protected void update() throws IOException {
         view();
         System.out.println("Enter id");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = InputData.getInputInt();
         System.out.print("Enter new type:");
-        String type = scanner.nextLine();
+        String type = InputData.getInputString();
         System.out.println("Enter Price");
-        BigDecimal price = BigDecimal.valueOf(Integer.parseInt(scanner.nextLine()));
+        BigDecimal price = BigDecimal.valueOf(Long.parseLong(InputData.getInputString()));
         System.out.println("Enter Quantity");
-        int qty = Integer.parseInt(scanner.nextLine());
+        int qty = InputData.getInputInt();
         vendorMenu.view();
         System.out.print("Select vendor: ");
-        int vendorId = Integer.parseInt(scanner.nextLine());
+        int vendorId = InputData.getInputInt();
         ViewStatus.viewExecutionStatus(watchManager.update(new Watch(id,ANALOG,price,qty,new Vendor(vendorId,null, null))));
 
     }
 
     @Override
-    protected void delete(Scanner scanner) {
+    protected void delete() throws IOException {
         view();
         System.out.println("Enter id:");
-        int id = Integer.parseInt(scanner.nextLine());
+        int id = InputData.getInputInt();
         ViewStatus.viewExecutionStatus(watchManager.delete(id));
         System.out.println();
     }
@@ -72,5 +74,20 @@ public class WatchesMenu extends SelectorWork implements ShowElement<Watch> {
     public void viewElement(Watch model) {
         System.out.format("%d - %s - d% - d%", model.getId(), model.getType(), model.getPrice(), model.getQuantity());
         vendorMenu.viewElement(model.getVendor());
+    }
+
+    @Override
+    public void viewTableHeader() {
+
+    }
+
+    @Override
+    public void viewLine(Watch model) {
+
+    }
+
+    @Override
+    public void viewTableName() {
+
     }
 }

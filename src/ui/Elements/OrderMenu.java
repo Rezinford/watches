@@ -6,27 +6,32 @@ import java.util.Scanner;
 
 public class OrderMenu extends SelectorWork implements ShowElement<Order> {
     @Override
-    protected void view() {
+    protected void view() {}
+
+    @Override
+    protected void add() {}
+
+    @Override
+    protected void update() {}
+
+    @Override
+    protected void delete() {}
+
+    @Override
+    public void viewElement(Order model) {}
+
+    @Override
+    public void viewTableHeader() {
 
     }
 
     @Override
-    protected void add(Scanner scanner) {
+    public void viewLine(Order model) {
 
     }
 
     @Override
-    protected void update(Scanner scanner) {
-
-    }
-
-    @Override
-    protected void delete(Scanner scanner) {
-
-    }
-
-    @Override
-    public void viewElement(Order model) {
+    public void viewTableName() {
 
     }
 }

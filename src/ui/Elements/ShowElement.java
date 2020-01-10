@@ -1,5 +1,10 @@
 package ui.Elements;
 
+import models.Vendor;
+
 public interface ShowElement<T> {
-   public void viewElement(T model);
+   void viewElement(T model);
+   void viewTableHeader();
+   void viewLine(T model);
+   void viewTableName();
 }

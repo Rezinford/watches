@@ -1,5 +1,8 @@
 package ui;
 
+import utils.InputData;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class StartMenu {
@@ -13,22 +16,23 @@ public class StartMenu {
         System.out.println("0. Exit");
     }
 
-    public void show(Scanner scanner) {
+    public void show() throws IOException {
         int selection;
         do {
             printMenu();
-            selection = scanner.nextInt();
-
+            selection = InputData.getInputInt();
             switch (selection) {
                 case 1: {
-                    if (singIn != null) singIn = new SingIn();
-                    singIn.show(scanner);
+                    if (singIn == null) {
+                        singIn = new SingIn();
+                    }
+                    singIn.show();
                     break;
                 }
 
                 case 2: {
                     if (registrationMenu != null) registrationMenu = new RegistrationMenu();
-                    registrationMenu.show(scanner);
+                    registrationMenu.show();
                     break;
                 }
             }

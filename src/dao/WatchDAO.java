@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static db.dbConnect.getConnection;
+import static db.DBConnect.getConnection;
 import static models.watch.WatchType.ANALOG;
 
 public class WatchDAO implements DAO<models.watch.Watch> {

@@ -1,5 +1,8 @@
 package ui.Elements;
 
+import utils.InputData;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public abstract class SelectorWork {
@@ -12,12 +15,12 @@ public abstract class SelectorWork {
         System.out.println("0. return to main menu");
     }
 
-    public void show(Scanner scanner) {
+    public void show() throws IOException {
         int answer;
 
         do {
             Menu();
-            answer = scanner.nextInt();
+            answer = InputData.getInputInt();
 
             switch (answer) {
                 case 1: {
@@ -25,22 +28,22 @@ public abstract class SelectorWork {
                     break;
                 }
                 case 2: {
-                    add(scanner);
+                    add();
                     break;
                 }
                 case 3: {
-                    update(scanner);
+                    update();
                     break;
                 }
                 case 4: {
-                    delete(scanner);
+                    delete();
                     break;
                 }
             }
         } while (answer != 0);
     }
-    protected abstract void view();
-    protected abstract void add(Scanner scanner);
-    protected abstract void update(Scanner scanner);
-    protected abstract void delete(Scanner scanner);
+    protected abstract void view()throws IOException;
+    protected abstract void add() throws IOException;
+    protected abstract void update()throws IOException;
+    protected abstract void delete()throws IOException;
 }

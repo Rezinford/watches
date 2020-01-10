@@ -1,11 +1,13 @@
 package ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SingIn {
-    private SelectorElementMenu selectorElementMenu;
-    public void show(Scanner scanner) {
+    private SelectorElementMenu selectorElementMenu = new SelectorElementMenu();
+    public void show() throws IOException {
         //todo: add menu
-        selectorElementMenu.show(scanner);
+        System.out.println("SingIn successful.....");
+        selectorElementMenu.show();
     }
 }

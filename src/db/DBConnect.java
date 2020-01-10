@@ -9,27 +9,30 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class dbConnect {
+public class DBConnect {
     private static Connection connection;
 
     public static Connection getConnection() {
-        try {
-            connection = getConnectionWithParam();
-            System.out.println("Connection to Store DB succesfull!");
-        } catch (IOException ex) {
-            System.out.println("Setting Connection failed...");
+       if(connection==null){
+           try {
+               connection = getConnectionWithParam();
+               System.out.println("Connection to Store DB succesfull!");
+           } catch (IOException ex) {
+               System.out.println("Setting Connection failed...");
 //            System.out.println(ex);
-        } catch (SQLException ex) {
-            System.out.println("Connection failed...");
+           } catch (SQLException ex) {
+               System.out.println("Connection failed...");
 //            System.out.println(ex);
-        }
+           }
+       }
         return connection;
     }
 
     public static Connection getConnectionWithParam() throws SQLException, IOException {
 
         Properties props = new Properties();
-        try (InputStream in = Files.newInputStream(Paths.get("database.properties"))) {
+        try (InputStream in = Files.newInputStream(Paths.get("C:\\Java\\TrackEnsure\\watches\\src\\resources\\application.properties"))) {
+
             props.load(in);
         }
         String url = props.getProperty("url");

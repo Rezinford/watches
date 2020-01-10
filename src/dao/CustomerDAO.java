@@ -1,10 +1,8 @@
 package dao;
 
-import models.Country;
 import models.Customer;
 import models.DiscountCard;
 
-import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static db.dbConnect.getConnection;
+import static db.DBConnect.getConnection;
 
 public class CustomerDAO implements DAO<models.Customer> {
     final String table = "score.customer";
